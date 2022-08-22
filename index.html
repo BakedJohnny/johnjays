@@ -27,6 +27,8 @@
   <!-- Template Main CSS File -->
   <link href="assets/css/style.css" rel="stylesheet">
 
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   <!-- =======================================================
   * Template Name: Personal - v4.8.1
   * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
@@ -729,7 +731,7 @@
         </div>
       </div>
 
-      <form action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
+      <form action="" method="POST" role="form" class="php-email-form mt-4" id="submit-form">
         <div class="row">
           <div class="col-md-6 form-group">
             <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
@@ -751,7 +753,25 @@
         </div>
         <div class="text-center"><button type="submit">Send Message</button></div>
       </form>
+      <script>
+        $("#submit-form").submit((e)=>{
+            e.preventDefault()
+            $.ajax({
+                url:"https://script.google.com/macros/s/AKfycbzQQfTqYMKcqbU87yw2MbBiKbGVvS3fFOIwsaVQaZyq6rLoceBrQc7g_ajTEOhdzISltw/exec",
+                data:$("#submit-form").serialize(),
+                method:"post",
+                success:function (response){
+                    alert("Form submitted successfully")
+                    window.location.reload()
+                    //window.location.href="https://google.com"
+                },
+                error:function (err){
+                    alert("Something Error")
 
+                }
+            })
+        })
+    </script>
     </div>
   </section><!-- End Contact Section -->
 
