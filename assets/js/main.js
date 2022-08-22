@@ -212,14 +212,14 @@
   });
 
   /**
-   * Initiate portfolio lightbox 
+   * Initiate portfolio lightbox
    */
   const portfolioLightbox = GLightbox({
     selector: '.portfolio-lightbox'
   });
 
   /**
-   * Initiate portfolio details lightbox 
+   * Initiate portfolio details lightbox
    */
   const portfolioDetailsLightbox = GLightbox({
     selector: '.portfolio-details-lightbox',
@@ -245,8 +245,20 @@
   });
 
   /**
-   * Initiate Pure Counter 
+   * Initiate Pure Counter
    */
   new PureCounter();
 
 })()
+
+function validateForm() {
+  let name = document.forms["contact"]["name"].value;
+  let email = document.forms["contact"]["email"].value;
+  let sub = document.forms["contact"]["subject"].value;
+  let mes = document.forms["contact"]["message"].value;
+  if(name == "" || email == "" || sub == "" || mes == "")
+  {
+    alert("No fields should be left empty");
+    return false;
+  }
+}
