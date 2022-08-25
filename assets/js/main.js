@@ -323,7 +323,7 @@ function validateForm()
 
 $("#submit-form").submit((e)=>{
     e.preventDefault();
-    let validation = validate();
+    let validation = validateForm();
 
     if(validation)
     {
