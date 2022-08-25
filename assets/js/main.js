@@ -244,15 +244,105 @@
   new PureCounter();
 
 })()
+//
+// function validateForm() {
+//   let name = document.forms["contact"]["name"].value;
+//   let email = document.forms["contact"]["email"].value;
+//   let sub = document.forms["contact"]["subject"].value;
+//   let mes = document.forms["contact"]["message"].value;
+//   if(name == "" || email == "" || sub == "" || mes == "")
+//   {
+//     alert("No fields should be left empty");
+//     return false;
+//   }
+// }
 
-function validateForm() {
-  let name = document.forms["contact"]["name"].value;
-  let email = document.forms["contact"]["email"].value;
-  let sub = document.forms["contact"]["subject"].value;
-  let mes = document.forms["contact"]["message"].value;
-  if(name == "" || email == "" || sub == "" || mes == "")
-  {
-    alert("No fields should be left empty");
-    return false;
-  }
+let name = document.getElementById("name");
+    let email = document.getElementById("email");
+    let subject = document.getElementById("subject");
+    let message = document.getElementById("message");
+
+function validateForm()
+{
+    // name validation
+    if(name.value == "")
+    {
+       alert("Name field shouldn't be empty");
+       return false;
+    }
+    else if(!isNaN(name.value))
+    {
+        alert("Name shouldn't be a number");
+        return false;
+    }
+    else if(name.value.length <= 2)
+    {
+        alert("Name is too short");
+        return false;
+    }
+
+    // email validation
+    if(email.value == "")
+    {
+       alert("Email field shouldn't be empty");
+       return false;
+    }
+    else if(email.value.indexOf('@') <= 0)
+    {
+        alert("Invalid email format");
+        return false;
+    }
+    else if((email.value.charAt(email.value.length-4)!='.') && (email.value.charAt(email.value.length-3)!='.'))
+    {
+        alert("Invalid email format");
+        return false;
+    }
+
+    // Subject validation
+    if(subject.value == "")
+    {
+      alert("Subject field can't be blank.");
+       return false;
+    }
+
+    // message validation
+    if(message.value == "")
+    {
+       alert("Message field can't be blank");
+       return false;
+    }
+    else if(message.value.length <= 10)
+    {
+        alert("Message is short than 10 characters");
+        return false;
+    }
+    return true;
 }
+
+// submission
+
+$("#submit-form").submit((e)=>{
+    e.preventDefault();
+    let validation = validate();
+
+    if(validation)
+    {
+    $.ajax({
+        url:"https://script.google.com/macros/s/AKfycbzQQfTqYMKcqbU87yw2MbBiKbGVvS3fFOIwsaVQaZyq6rLoceBrQc7g_ajTEOhdzISltw/exec",
+        data:$("#submit-form").serialize(),
+        method:"post",
+        success:function (response){
+            // alert("Form submitted successfully")
+            show.style.display = "block";
+            setTimeout(() => {
+                window.location.reload()
+            },3000);
+
+            //window.location.href="https://google.com"
+        },
+        error:function (err){
+            alert("Something Error")
+
+        }
+        })}
+})
